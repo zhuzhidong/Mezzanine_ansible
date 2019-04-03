@@ -42,8 +42,8 @@ pipeline {
         stage('ansible') {
             steps {
                 script {
-                    cd playbooks
-                    ansible-playbook mezzanine-across-hosts.yml
+                    sh 'cd playbooks'
+                    sh 'ansible-playbook mezzanine-across-hosts.yml'
                 }
             }
         }
