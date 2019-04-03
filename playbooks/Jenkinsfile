@@ -41,7 +41,7 @@ pipeline {
 
         stage('ansible') {
             steps {
-                dir(playbooks) {
+                dir('playbooks') {
                     sh 'pwd'
                 }
                 script {
