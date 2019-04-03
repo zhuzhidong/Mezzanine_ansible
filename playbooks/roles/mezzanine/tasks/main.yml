@@ -1,0 +1,20 @@
+---
+- name: install apt packages
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name:
+      - git
+      - libjpeg-dev
+      - libpq-dev
+      - memcached
+      - nginx
+      - python-dev
+      - python-pip
+      - python-psycopg2
+      - python-setuptools
+      - python-virtualenv
+      - supervisor
+  become: True
+- include: django.yml
+- include: nginx.yml

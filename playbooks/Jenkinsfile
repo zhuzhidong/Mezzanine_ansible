@@ -1,0 +1,49 @@
+// This Jenkinsfile is prepared to simulate
+// the regular Jenkins pipeline. Ignore it.
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Build' 
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Test' 
+            }
+        }
+
+        stage('Confirm') {
+            steps {
+                input(message:'请确认测试已经通过')
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    env.RELEASE_SCOPE = input message:'请选择发布类型',
+                    ok : '确认!',
+                    parameters: [
+                        choice(
+                            name: 'DeployType',
+                            choices: ['开发环境','测试环境','生产环境'],
+                            description: '请选择本次发布的类型'
+                        )
+                    ]
+                }
+                echo "本次发布到${env.RELEASE_SCOPE}成功！！！"
+            }
+        }
+
+        stage('ansible') {
+            steps {
+                ansiblePlaybook installation: 'Ansible2.7.9', playbook: './playbooks/Jenkinsfile'
+            }
+        }
+    }
+
+}
