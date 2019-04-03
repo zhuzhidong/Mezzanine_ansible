@@ -41,7 +41,7 @@ pipeline {
 
         stage('ansible') {
             steps {
-                ansiblePlaybook installation: 'Ansible2.7.9', playbook: './playbooks/mezzanine-across-hosts.yml'
+                ansiblePlaybook installation: 'Ansible2.7.9',inventory: './playbooks/hosts' playbook: './playbooks/mezzanine-across-hosts.yml'
             }
         }
     }
