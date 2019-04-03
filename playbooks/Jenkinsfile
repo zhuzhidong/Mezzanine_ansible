@@ -43,6 +43,7 @@ pipeline {
             steps {
                 script {
                     sh 'cd playbooks'
+                    sh 'pwd'
                     sh 'ansible-playbook mezzanine-across-hosts.yml'
                 }
             }
